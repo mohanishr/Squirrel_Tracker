@@ -24,5 +24,15 @@ def add(request):
 
     return render(request, 'sightings/add.html', {'form':form})
 
+def sqid(request, usid):
+    squirrel_data = Sighting.objects.get(unique_squirrel_id = usid) 
+    if request.method == 'POST':
+        form = AddForm(request.POST, instance=squirrel_data)
+        if form.is_valid():
+            form.save()
+            return HttpResponseRedirect('/sightings/')
+    else:
+        form = AddForm(instance = squirrel_data)
+    return render(request, 'sightings/update.html', {'form':form})
 
 # Create your views here.
