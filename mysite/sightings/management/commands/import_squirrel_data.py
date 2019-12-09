@@ -1,5 +1,5 @@
 
-m django.core.management.base import BaseCommand
+from django.core.management.base import BaseCommand
 import pandas as pd
 import csv
 from sightings.models import Sighting
