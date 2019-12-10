@@ -60,17 +60,35 @@ def stats(request):
     x=['AM','PM']
     lst2=[df2.groupby('hectare').count().sort_values(by=['x'], ascending=False)['x'][f] for f in range(20)]
     lst3=[df2.groupby('hectare').count().sort_values(by=['x'], ascending=False).index[x] for x in range(20)]
+    ground=['Above Ground', 'Below Ground']
+    lst4=[df2.groupby('location').count()['x'][f] for f in range(2)]
+    lst5=[]
+    lst5.append(df2.groupby('running').count().iloc[1]['x'])
+    lst5.append(df2.groupby('chasing').count().iloc[1]['x'])
+    lst5.append(df2.groupby('climbing').count().iloc[1]['x'])
+    lst5.append(df2.groupby('eating').count().iloc[1]['x'])
+    lst5.append(df2.groupby('foraging').count().iloc[1]['x'])
+    activity=['running', 'chasing','climbing', 'eating', 'foraging' ]
+    lst6=[]
+    lst6.append(df2.groupby('kuks').count().iloc[1]['x'])
+    lst6.append(df2.groupby('quaas').count().iloc[1]['x'])
+    lst6.append(df2.groupby('moans').count().iloc[1]['x'])
+    calls=['kuks','quaas', 'moans']
 
 
-
-    fig, axs = plt.subplots(2, 2, figsize=(30,15))
+    fig, axs = plt.subplots(2, 3, figsize=(30,15))
     matplotlib.pyplot.subplots_adjust(left=0.125, bottom=0.1, right=0.9, top=0.9, wspace=1.5, hspace=1.5)
     axs[0, 0].pie(sizes, explode=explode, labels=labels, radius=2, textprops={'fontsize': 30})
-    axs[0, 1].bar(x, height=lst)
+    axs[0, 1].bar(x, height=lst, color=(0, 0.7, 0))
     axs[0, 1].title.set_text('Variation in shift sightings')
-    axs[0, 1].set_xlabel('Shift')
-    axs[0, 1].set_ylabel('Frequency of sightings')
-    axs[1, 1].bar(lst3, height=lst2)
+    axs[0, 1].set_xlabel('Shift', fontsize=20)
+    axs[0, 1].set_ylabel('Frequency of sightings', fontsize=20)
+    axs[0, 2].bar(lst3, height=lst2, color=(0.6, 0, 0))
+    axs[1, 0].bar(ground, height=lst4, color=(1, 0.8, 0.2))
+    axs[1, 1].bar(activity, height=lst5)
+    axs[1, 2].bar(calls, height=lst6, color=(1, 0.6, 0))
+
+    
     #axs[1 ,1].xticks(rotation=90)
 
 
