@@ -60,7 +60,7 @@ def stats(request):
     x=['AM','PM']
     lst2=[df2.groupby('hectare').count().sort_values(by=['x'], ascending=False)['x'][f] for f in range(20)]
     lst3=[df2.groupby('hectare').count().sort_values(by=['x'], ascending=False).index[x] for x in range(20)]
-    ground=['Above Ground', 'Below Ground']
+    ground=['Above \n'+'Ground', 'Below \n'+'Ground']
     lst4=[df2.groupby('location').count()['x'][f] for f in range(2)]
     lst5=[]
     lst5.append(df2.groupby('running').count().iloc[1]['x'])
@@ -77,19 +77,35 @@ def stats(request):
 
 
     fig, axs = plt.subplots(2, 3, figsize=(30,15))
-    matplotlib.pyplot.subplots_adjust(left=0.125, bottom=0.1, right=0.9, top=0.9, wspace=1.5, hspace=1.5)
+    fig.suptitle('SQUIRREL STATS', fontsize=50)
+    matplotlib.pyplot.subplots_adjust(left=0.125, bottom=0.15, right=0.9, top=0.8, wspace=1.5, hspace=1.5)
     axs[0, 0].pie(sizes, explode=explode, labels=labels, radius=2, textprops={'fontsize': 30})
+    axs[0, 0].set_title('COLOUR DISTRIBUTION', pad=70, fontsize=30)
     axs[0, 1].bar(x, height=lst, color=(0, 0.7, 0))
-    axs[0, 1].title.set_text('Variation in shift sightings')
-    axs[0, 1].set_xlabel('Shift', fontsize=20)
-    axs[0, 1].set_ylabel('Frequency of sightings', fontsize=20)
-    axs[0, 2].bar(lst3, height=lst2, color=(0.6, 0, 0))
+    axs[0, 1].set_title('VARIATION IN \n'+' SHIFT WISE SIGHTINGS', fontsize=30)
+    axs[0, 1].set_xlabel('Shift', fontsize=25)
+    axs[0, 1].set_ylabel('Frequency of sightings', fontsize=25)
+    axs[0, 1].tick_params(axis='both', which='major', labelsize=20)
+    axs[1, 2].bar(lst3, height=lst2, color=(0.6, 0, 0))
+    axs[1, 2].set_title('TOP 20 HECTARE\n'+' SIGHTINGS', fontsize=30)
+    axs[1, 2].set_xlabel('Hectare', fontsize=20)
+    axs[1, 2].set_ylabel('Frequency of sightings', fontsize=25)
     axs[1, 0].bar(ground, height=lst4, color=(1, 0.8, 0.2))
+    axs[1, 0].set_title('SQUIRREL LOCATIONS\n'+' OF SIGHTINGS', fontsize=30)
+    axs[1, 0].set_xlabel('Locations', fontsize=25)
+    axs[1, 0].set_ylabel('Frequency of Sightings', fontsize=25)
+    axs[1, 0].tick_params(axis='both', which='major', labelsize=20)
     axs[1, 1].bar(activity, height=lst5)
-    axs[1, 2].bar(calls, height=lst6, color=(1, 0.6, 0))
-
-    
-    #axs[1 ,1].xticks(rotation=90)
+    axs[1, 1].set_title('ACTIVITY\n'+' WISE SIGHTINGS', fontsize=30)
+    axs[1, 1].tick_params(axis='x', rotation=90)
+    axs[1, 1].set_xlabel('Activity', fontsize=25)
+    axs[1, 1].set_ylabel('Frequency of sighting', fontsize=25)
+    axs[1, 1].tick_params(axis='both', which='major', labelsize=20)
+    axs[0, 2].bar(calls, height=lst6, color=(1, 0.6, 0))
+    axs[0, 2].set_title('FREQUENCY\n'+' OF CALLS', fontsize=30)
+    axs[0, 2].set_xlabel('Calls', fontsize=25)
+    axs[0, 2].set_ylabel('Frequency of sightings', fontsize=25)
+    axs[0, 2].tick_params(axis='both', which='major', labelsize=20)    
 
 
     buffer = BytesIO()
