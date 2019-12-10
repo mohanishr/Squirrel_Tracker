@@ -1,0 +1,59 @@
+<body>
+	<header>
+		<h1>LIST OF SQUIRREL SIGHTINGS</h1>
+	</header>
+</body>
+<table border = 1>
+    <tr>
+        <th>x</th>
+	<th>y</th>
+	<th>unique_squirrel_id</th>
+	<th>shift</th>
+	<th>date</th>
+	<th>age</th>
+	<th>primary_fur_color</th>
+	<th>location</th>
+	<th>specific_location</th>
+	<th>running</th>
+	<th>chasing</th>
+	<th>climbing</th>
+	<th>eating</th>
+	<th>foraging</th>
+	<th>other_activities</th>
+	<th>kuks</th>
+	<th>quaas</th>
+	<th>moans</th>
+	<th>tail_flags</th>
+	<th>tail_twitches</th>
+	<th>approaches</th>
+	<th>indifferent</th>
+	<th>runs_from</th>
+    </tr>
+    {% for item in sq_data %}
+    <tr> 
+        <td>{{ item.x }}</td>
+	<td>{{ item.y }}</td>
+	<td><a href="/sightings/{{ item.unique_squirrel_id }}/">{{ item.unique_squirrel_id }}</a></td>
+	<td>{{ item.shift }}</td>
+	<td>{{ item.date }}</td>
+	<td>{{ item.age }}</td>
+	<td>{{ item.primary_fur_color }}</td>
+	<td>{{ item.location }}</td>
+	<td>{{ item.specific_location }}</td>
+	<td>{{ item.running }}</td>
+	<td>{{ item.chasing }}</td>
+	<td>{{ item.climbing }}</td>
+	<td>{{ item.eating }}</td>
+	<td>{{ item.foraging }}</td>
+	<td>{{ item.other_activities }}</td>
+	<td>{{ item.kuks}}</td>
+	<td>{{ item.quaas }}</td>
+	<td>{{ item.moans }}</td>
+	<td>{{ item.tail_flags }}</td>
+	<td>{{ item.tail_twitches }}</td>
+	<td>{{ item.approaches }}</td>
+	<td>{{ item.indifferent }}</td>
+        <td>{{ item.runs_from }}</td>
+    </tr>
+    {% endfor %}
+</table>

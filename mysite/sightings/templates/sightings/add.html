@@ -1,0 +1,17 @@
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Squirrel Data</title>
+</head>
+<body>
+<h1>ADD NEW SQUIRREL DATA</h1>
+
+<form method="post">
+    {% csrf_token %}
+    <table>
+    {{form.as_table}}
+    </table>
+<input type="submit" value="Submit" />
+</form>
+</body>
+</html>
