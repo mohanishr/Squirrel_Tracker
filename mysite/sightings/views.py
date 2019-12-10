@@ -58,17 +58,19 @@ def stats(request):
     sizes=[x1, x2, x3]
     lst=[df2.groupby('shift').count()['x'][f] for f in range(2)]
     x=['AM','PM']
-    lst2=[df2.groupby('hectare').count().sort_values(by=['x'], ascending=False)['x'][f] for f in range(20)]
-    lst3=[df2.groupby('hectare').count().sort_values(by=['x'], ascending=False).index[x] for x in range(20)]
+    lst2=[]
+    lst2.append(df2.groupby('age').count().loc['Adult']['x'])
+    lst2.append(df2.groupby('age').count().loc['Juvenile']['x'])
+    lst3=['Adult', 'Juvenile']
     ground=['Above \n'+'Ground', 'Below \n'+'Ground']
     lst4=[df2.groupby('location').count()['x'][f] for f in range(2)]
     lst5=[]
     lst5.append(df2.groupby('running').count().iloc[1]['x'])
-    lst5.append(df2.groupby('chasing').count().iloc[1]['x'])
+    #lst5.append(df2.groupby('chasing').count().iloc[1]['x'])
     lst5.append(df2.groupby('climbing').count().iloc[1]['x'])
     lst5.append(df2.groupby('eating').count().iloc[1]['x'])
     lst5.append(df2.groupby('foraging').count().iloc[1]['x'])
-    activity=['running', 'chasing','climbing', 'eating', 'foraging' ]
+    activity=['running','climbing', 'eating', 'foraging' ]
     lst6=[]
     lst6.append(df2.groupby('kuks').count().iloc[1]['x'])
     lst6.append(df2.groupby('quaas').count().iloc[1]['x'])
@@ -87,9 +89,9 @@ def stats(request):
     axs[0, 1].set_ylabel('Frequency of sightings', fontsize=25)
     axs[0, 1].tick_params(axis='both', which='major', labelsize=20)
     axs[1, 2].bar(lst3, height=lst2, color=(0.6, 0, 0))
-    axs[1, 2].set_title('TOP 20 HECTARE\n'+' SIGHTINGS', fontsize=30)
-    axs[1, 2].set_xlabel('Hectare', fontsize=20)
-    axs[1, 2].set_ylabel('Frequency of sightings', fontsize=25)
+    axs[1, 2].set_title('AGE DISTRIBUTION', fontsize=30)
+    axs[1, 2].set_xlabel('Ages', fontsize=20)
+    axs[1, 2].set_ylabel('Frequency of Ages', fontsize=25)
     axs[1, 0].bar(ground, height=lst4, color=(1, 0.8, 0.2))
     axs[1, 0].set_title('SQUIRREL LOCATIONS\n'+' OF SIGHTINGS', fontsize=30)
     axs[1, 0].set_xlabel('Locations', fontsize=25)
